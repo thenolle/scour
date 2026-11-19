@@ -26,4 +26,6 @@ scour is in early development. Security fixes are made on the latest development
 
 - scour has no authentication. It is a single-user tool and binds to loopback addresses only.
 - Requests must carry a loopback `Host` header. Requests that change state, and WebSocket upgrades, are refused when their `Origin` differs from the host they were sent to.
-- Anything that deletes files or changes the registry must be treated as a security boundary. Those features are not implemented yet and will be documented here when they are.
+- The cleaner never receives paths from the browser. It receives ids that refer to the last detection, and re-checks every item before moving it. It refuses paths less than three levels below a drive root, never follows links, and only moves items into the quarantine. The quarantine manifest is validated when it is read.
+- Items are deleted for good only when their retention period ends or when you choose Delete now.
+- The registry and the uninstaller are not implemented yet. They will be documented here when they are.
