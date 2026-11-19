@@ -14,12 +14,12 @@ Available today:
 - Duplicate detection for files of 1 MiB or larger, using BLAKE2b-256 hashes. Hard links to the same data are reported as duplicates.
 - A cleaner that finds temporary files, browser caches, developer caches (Cargo, NuGet, Gradle, npm, Bun, pip, and `node_modules` folders found by a scan) and downloaded AI models (Hugging Face, Ollama). Each item has a risk rating: safe, re-downloadable or needs review.
 - A quarantine. The cleaner never deletes. It moves items into a quarantine folder with a manifest, and you can restore them. Items are deleted for good after 14 days by default.
+- An uninstaller that lists installed programs, runs their uninstallers, and scans for leftover folders and registry keys. Folders go to the quarantine. Registry keys are exported to `.reg` files first and can be restored.
 
 Scanning only reads the file system. The cleaner changes files only when you select items and confirm, and only by moving them into the quarantine.
 
 Planned, in this order:
 
-- Uninstalling: installed programs with their leftover files and registry entries, and a registry backup before any change.
 - Install snapshots: record the system before and after an installer runs, then remove what it added.
 
 ### Known limitations
@@ -29,6 +29,7 @@ Planned, in this order:
 - Folders that Windows denies access to are counted as unreadable and skipped.
 - Files that other programs have open cannot be moved to quarantine. The cleaner reports them and leaves them in place.
 - Finding junk runs while the page waits, so it can take a while on drives with large caches.
+- Leftover detection matches names only, so check each item. Removing machine-wide registry keys and folders under Program Files needs an elevated terminal.
 
 ## Requirements
 
