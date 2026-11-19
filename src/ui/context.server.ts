@@ -1,7 +1,9 @@
 import type { Context } from '@gambrel/core'
-import type { HealthInfo } from '../shared/meta'
+import type { DriveCatalog } from '../scanner/drives'
+import type { ScanManager } from '../scanner/manager'
 
 /** What page guards and loaders receive. */
 export interface PageContext extends Context {
-	readonly info: HealthInfo
+  readonly scans: ScanManager
+  readonly drives: DriveCatalog
 }

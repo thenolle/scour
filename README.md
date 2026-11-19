@@ -6,14 +6,28 @@ scour runs on your own machine and serves its interface on localhost. It reads t
 
 ## Status
 
-scour is in early development. What exists today is the foundation: a local server, a health endpoint and a status page. Scanning, cleaning and uninstalling are planned and not yet available. Nothing in this repository changes files on your computer.
+scour is in early development. Disk analysis works. Cleaning, uninstalling and install snapshots are planned and not yet available.
+
+Available today:
+
+- Scanning of any folder or drive. Folders are read one at a time, and symbolic links and junctions are not followed.
+- Live progress over a local WebSocket while a scan runs.
+- A treemap of the largest items in any folder, a sortable folder browser and a breakdown by file type.
+- Duplicate detection for files of 1 MiB or larger, using BLAKE2b-256 hashes. Hard links to the same data are reported as duplicates.
+
+scour only reads the file system. It does not modify or delete files.
 
 Planned, in this order:
 
-- Disk analysis: multi-drive scanning with live progress, a treemap, a folder browser, file categories and duplicate detection.
 - Cleaning: temporary files and developer caches (browser caches, `node_modules`, Cargo, NuGet, Gradle, Hugging Face, Ollama), each with a risk rating. Deleted items go to a restorable quarantine first.
 - Uninstalling: installed programs with their leftover files and registry entries, and a registry backup before any change.
 - Install snapshots: record the system before and after an installer runs, then remove what it added.
+
+### Known limitations
+
+- Only the 100 largest files in each folder are listed individually. Smaller files are counted in the totals.
+- Sizes are logical file sizes, not space allocated on disk.
+- Folders that Windows denies access to are counted as unreadable and skipped.
 
 ## Requirements
 
