@@ -1,0 +1,96 @@
+.nav {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+}
+
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--fg);
+}
+
+.notice-ok {
+  color: var(--ok);
+}
+
+.notice p {
+  margin: 0;
+}
+
+.failures {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+}
+
+.detect-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.select {
+  min-width: 14rem;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--fg);
+  font: inherit;
+}
+
+.group-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.check {
+  width: 2rem;
+}
+
+.path-line,
+.note {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+.vault {
+  display: grid;
+  gap: 1rem;
+}
+
+.batch {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.batch:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.batch-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.batch-actions {
+  display: flex;
+  gap: 0.5rem;
+}

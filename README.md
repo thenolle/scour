@@ -6,20 +6,19 @@ scour runs on your own machine and serves its interface on localhost. It reads t
 
 ## Status
 
-scour is in early development. Disk analysis works. Cleaning, uninstalling and install snapshots are planned and not yet available.
+scour is in early development. Disk analysis and a junk cleaner work. Uninstalling and install snapshots are planned and not yet available.
 
 Available today:
 
-- Scanning of any folder or drive. Folders are read one at a time, and symbolic links and junctions are not followed.
-- Live progress over a local WebSocket while a scan runs.
-- A treemap of the largest items in any folder, a sortable folder browser and a breakdown by file type.
+- Scanning of any folder or drive, with live progress, a treemap, a sortable folder browser and a breakdown by file type. Symbolic links and junctions are not followed.
 - Duplicate detection for files of 1 MiB or larger, using BLAKE2b-256 hashes. Hard links to the same data are reported as duplicates.
+- A cleaner that finds temporary files, browser caches, developer caches (Cargo, NuGet, Gradle, npm, Bun, pip, and `node_modules` folders found by a scan) and downloaded AI models (Hugging Face, Ollama). Each item has a risk rating: safe, re-downloadable or needs review.
+- A quarantine. The cleaner never deletes. It moves items into a quarantine folder with a manifest, and you can restore them. Items are deleted for good after 14 days by default.
 
-scour only reads the file system. It does not modify or delete files.
+Scanning only reads the file system. The cleaner changes files only when you select items and confirm, and only by moving them into the quarantine.
 
 Planned, in this order:
 
-- Cleaning: temporary files and developer caches (browser caches, `node_modules`, Cargo, NuGet, Gradle, Hugging Face, Ollama), each with a risk rating. Deleted items go to a restorable quarantine first.
 - Uninstalling: installed programs with their leftover files and registry entries, and a registry backup before any change.
 - Install snapshots: record the system before and after an installer runs, then remove what it added.
 
@@ -28,6 +27,8 @@ Planned, in this order:
 - Only the 100 largest files in each folder are listed individually. Smaller files are counted in the totals.
 - Sizes are logical file sizes, not space allocated on disk.
 - Folders that Windows denies access to are counted as unreadable and skipped.
+- Files that other programs have open cannot be moved to quarantine. The cleaner reports them and leaves them in place.
+- Finding junk runs while the page waits, so it can take a while on drives with large caches.
 
 ## Requirements
 
@@ -51,11 +52,13 @@ bun run start
 
 Settings are environment variables. See `.env.example`.
 
-| Variable                 | Default       | Description                                                               |
-| ------------------------ | ------------- | ------------------------------------------------------------------------- |
-| `SCOUR_HOST`             | `127.0.0.1`   | Bind address. Only loopback addresses are accepted.                       |
-| `SCOUR_PORT`             | `4820`        | Listening port.                                                           |
-| `SCOUR_CLIENT_DIRECTORY` | `dist/client` | Directory of the built browser assets, relative to the working directory. |
+| Variable                 | Default                | Description                                                                         |
+| ------------------------ | ---------------------- | ----------------------------------------------------------------------------------- |
+| `SCOUR_HOST`             | `127.0.0.1`            | Bind address. Only loopback addresses are accepted.                                 |
+| `SCOUR_PORT`             | `4820`                 | Listening port.                                                                     |
+| `SCOUR_CLIENT_DIRECTORY` | `dist/client`          | Directory of the built browser assets, relative to the working directory.           |
+| `SCOUR_DATA_DIRECTORY`   | `%LOCALAPPDATA%\scour` | Where scour keeps its quarantine. Other drives get a `.scour` folder in their root. |
+| `SCOUR_QUARANTINE_DAYS`  | `14`                   | Days a quarantined item is kept before it is deleted for good (1 to 365).           |
 
 ## Security
 
