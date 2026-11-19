@@ -8,6 +8,7 @@ const DAY_MS = 24 * 60 * 60 * 1000
 const MANIFEST = 'manifest.json'
 const DATA = 'data'
 const MIN_DEPTH = 3
+const SHALLOW_PARENTS = new Set(['program files', 'program files (x86)', 'programdata'])
 
 export interface VaultItem {
 	readonly storedName: string
@@ -130,12 +131,12 @@ async function moveEntry(from: string, to: string): Promise<void> {
 
 /** Refuses paths that are not absolute or sit too close to a drive root. */
 export function assertSafeTarget(path: string): void {
-	const root = parse(path).root
-	const depth = path
-		.slice(root.length)
-		.split(/[\\/]+/)
-		.filter((segment) => segment !== '').length
-	if (!isAbsolute(path) || depth < MIN_DEPTH) throw new CleanerError(`Refusing to touch ${path}: it is too close to the drive root.`)
+  const segments = path
+    .slice(parse(path).root.length)
+    .split(/[\\/]+/)
+    .filter((segment) => segment !== '')
+  const shallowAllowed = segments.length === 2 && SHALLOW_PARENTS.has((segments[0] ?? '').toLowerCase())
+  if (!isAbsolute(path) || (segments.length < MIN_DEPTH && !shallowAllowed)) throw new CleanerError(`Refusing to touch ${path}: it is too close to the drive root.`)
 }
 
 /**

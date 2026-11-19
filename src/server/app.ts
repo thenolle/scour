@@ -13,6 +13,7 @@ import { registerCleanerRoutes } from './cleaner-routes'
 import { errorResponse } from './responses'
 import { requestGuard } from './security'
 import type { AppServices } from './services'
+import { registerUninstallerRoutes } from './uninstaller-routes'
 
 function handleError(error: unknown): Response {
 	if (error instanceof ScanInputError || error instanceof CleanerError || error instanceof SyntaxError) return errorResponse(400, 'bad_request', error.message)
@@ -34,7 +35,8 @@ export function createHttpApp(config: Config, services: AppServices): App {
 	app.get('/api/health', () => json({ data: collectHealth() }))
 	registerScanRoutes(app, services)
 	registerCleanerRoutes(app, services)
-	app.notFound((context) => context.url.pathname.startsWith('/api/') ? errorResponse(404, 'not_found', 'Not found') : documents.handle(context.request, { ...context, scans: services.scans, drives: services.drives, cleaner: services.cleaner }))
+	registerUninstallerRoutes(app, services)
+	app.notFound((context) => context.url.pathname.startsWith('/api/') ? errorResponse(404, 'not_found', 'Not found') : documents.handle(context.request, { ...context, ...services }))
 	app.onError(handleError)
 	return app
 }

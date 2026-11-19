@@ -1,7 +1,7 @@
 import { cp } from 'node:fs/promises'
 import { join } from 'node:path'
 
-const STYLESHEETS = ['app.css', 'cleaner.css'] as const
+const STYLESHEETS = ['app.css', 'cleaner.css', 'programs.css'] as const
 
 /**
  * Copies the component stylesheet, the application stylesheets and the static
