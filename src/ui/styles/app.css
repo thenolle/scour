@@ -1,0 +1,42 @@
+:root {
+  --scour-border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+}
+
+body {
+  margin: 0;
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.shell {
+  box-sizing: border-box;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+}
+
+.facts dt {
+  opacity: 0.65;
+}
+
+.facts dd {
+  margin: 0;
+  text-align: right;
+}
+
+.facts dt,
+.facts dd {
+  padding-bottom: 0.5rem;
+  border-bottom: var(--scour-border);
+}
