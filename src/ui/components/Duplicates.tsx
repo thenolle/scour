@@ -13,7 +13,7 @@ export function Duplicates(props: { readonly view: ScanView }): Child {
 			<div>
 				<p class="num" data-live="dup-progress">{`${formatCount(duplicates.done)} of ${formatCount(duplicates.total)} files checked`}</p>
 				<form method="post" action={`${base}/cancel`}>
-					<Button type="submit">Stop</Button>
+					<Button type="submit" variant="outline">Stop</Button>
 				</form>
 			</div>
 		)

@@ -19,7 +19,7 @@ export default function ProgramsPage(props: PageProps<ParamsOf<'/programs'>, Loa
 	const report = view.report
 	return (
 		<div class="app">
-			<AppHeader />
+			<AppHeader current="programs" />
 			<main class="shell wide">
 				{report === null ? null : (
 					<div class={report.kind === 'ok' ? 'notice notice-ok' : 'notice notice-error'} role="status">
@@ -45,10 +45,10 @@ export default function ProgramsPage(props: PageProps<ParamsOf<'/programs'>, Loa
 								<Label for="q">Search</Label>
 								<Input id="q" name="q" value={view.query} placeholder="Name or publisher" />
 								<input type="hidden" name="sort" value={view.sort} />
-								<Button type="submit">Search</Button>
+								<Button type="submit" variant="secondary">Search</Button>
 							</form>
 							<form method="post" action="/actions/programs/refresh">
-								<Button type="submit">Reload list</Button>
+								<Button type="submit" variant="outline">Reload list</Button>
 							</form>
 						</div>
 						<div class="table-wrap">
@@ -99,10 +99,10 @@ export default function ProgramsPage(props: PageProps<ParamsOf<'/programs'>, Loa
 											</div>
 											<div class="batch-actions">
 												<form method="post" action={`/actions/registry/${encodeURIComponent(backup.id)}/restore`}>
-													<Button type="submit">Restore</Button>
+													<Button type="submit" variant="outline">Restore</Button>
 												</form>
 												<form method="post" action={`/actions/registry/${encodeURIComponent(backup.id)}/discard`}>
-													<Button type="submit">Delete backup</Button>
+													<Button type="submit" variant="destructive">Delete backup</Button>
 												</form>
 											</div>
 										</div>

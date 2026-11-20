@@ -11,7 +11,7 @@ export default function HomePage(props: PageProps<ParamsOf<'/'>, LoaderData<type
   const { drives, scans, error } = props.data
   return (
     <div class="app">
-      <AppHeader />
+      <AppHeader current="drives" />
       <main class="shell wide">
         {error === null ? null : <p class="notice notice-error" role="alert">{error}</p>}
         <Card>

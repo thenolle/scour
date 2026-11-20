@@ -39,7 +39,7 @@ export function CandidateGroup(props: { readonly group: RiskGroupView }): Child 
 								{group.candidates.map((candidate) => (
 									<tr key={candidate.id}>
 										<td class="check">
-											<input type="checkbox" name="id" value={candidate.id} aria-label={`Select ${candidate.title}`} />
+											<input type="checkbox" class="gb-checkbox" name="id" value={candidate.id} aria-label={`Select ${candidate.title}`} />
 										</td>
 										<td class="name-cell">
 											<span class="entry" title={candidate.path}>{candidate.title}</span>

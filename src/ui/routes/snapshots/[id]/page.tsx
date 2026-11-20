@@ -14,7 +14,7 @@ export default function SnapshotPage(props: PageProps<ParamsOf<'/snapshots/[id]'
 	const removable = diff === null ? 0 : diff.removableFiles + diff.removableKeys
 	return (
 		<div class="app">
-			<AppHeader />
+			<AppHeader current="snapshots" />
 			<main class="shell wide" data-job-id={snapshot.id} data-job-status={busy ? 'running' : 'none'}>
 				<ReportNotice report={report} />
 
@@ -31,7 +31,7 @@ export default function SnapshotPage(props: PageProps<ParamsOf<'/snapshots/[id]'
 						{busy ? <p class="muted">Working. This page reloads when it finishes.</p> : null}
 						{busy ? null : (
 							<form method="post" action={`${base}/delete`}>
-								<Button type="submit">Delete snapshot</Button>
+								<Button type="submit" variant="destructive">Delete snapshot</Button>
 							</form>
 						)}
 					</CardContent>
@@ -85,7 +85,7 @@ export default function SnapshotPage(props: PageProps<ParamsOf<'/snapshots/[id]'
 											<tbody>
 												{diff.files.map((item) => (
 													<tr key={item.id}>
-														<td class="check">{item.removable ? <input type="checkbox" name="item" value={item.id} aria-label={`Select ${item.path}`} /> : null}</td>
+														<td class="check">{item.removable ? <input type="checkbox" class="gb-checkbox" name="item" value={item.id} aria-label={`Select ${item.path}`} /> : null}</td>
 														<td class="name-cell">
 															<span class="entry" title={item.path}>{item.path}</span>
 															<span class="note muted">{item.removable ? `${item.kind === 'dir' ? 'Folder' : 'File'} to quarantine \u00b7 ${formatCount(item.files)} files` : 'Not removed automatically: too close to a system location'}</span>
@@ -95,7 +95,7 @@ export default function SnapshotPage(props: PageProps<ParamsOf<'/snapshots/[id]'
 												))}
 												{diff.keys.map((item) => (
 													<tr key={item.id}>
-														<td class="check">{item.removable ? <input type="checkbox" name="item" value={item.id} aria-label={`Select ${item.key}`} /> : null}</td>
+														<td class="check">{item.removable ? <input type="checkbox" class="gb-checkbox" name="item" value={item.id} aria-label={`Select ${item.key}`} /> : null}</td>
 														<td class="name-cell">
 															<span class="entry" title={item.key}>{item.key}</span>
 															<span class="note muted">{item.removable ? 'Registry key, exported before deletion' : 'Not removed automatically: protected location'}</span>

@@ -11,7 +11,7 @@ export default function SnapshotsPage(props: PageProps<ParamsOf<'/snapshots'>, L
 	const view = props.data
 	return (
 		<div class="app">
-			<AppHeader />
+			<AppHeader current="snapshots" />
 			<main class="shell wide">
 				<ReportNotice report={view.report} />
 

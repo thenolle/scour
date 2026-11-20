@@ -18,10 +18,10 @@ export function VaultPanel(props: { readonly view: CleanerView }): Child {
 						</div>
 						<div class="batch-actions">
 							<form method="post" action={`/actions/vault/${encodeURIComponent(batch.id)}/restore`}>
-								<Button type="submit">Restore</Button>
+								<Button type="submit" variant="outline">Restore</Button>
 							</form>
 							<form method="post" action={`/actions/vault/${encodeURIComponent(batch.id)}/purge`}>
-								<Button type="submit">Delete now</Button>
+								<Button type="submit" variant="destructive">Delete now</Button>
 							</form>
 						</div>
 					</div>
