@@ -242,3 +242,43 @@ form {
     padding: 1.25rem 1rem 2.5rem;
   }
 }
+
+.shell-sidebar .gb-sidebar-footer {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.shell-sidebar .gb-trigger {
+  display: flex;
+}
+
+.about-button {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.about-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-note {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+@media (max-width:48rem) {
+  .shell-sidebar .gb-sidebar-footer {
+    display: block;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .shell-sidebar .foot {
+    display: none;
+  }
+
+  .about-button {
+    width: auto;
+  }
+}
