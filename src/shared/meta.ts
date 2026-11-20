@@ -1,5 +1,7 @@
+import { APP_VERSION } from './version'
+
+export { APP_VERSION }
 export const APP_NAME = 'scour'
-export const APP_VERSION = '0.0.0'
 
 /**
  * Runtime facts shown on the status page and returned by `/api/health`.
