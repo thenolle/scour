@@ -5,7 +5,7 @@
 }
 
 .nav a {
-  color: var(--muted);
+  color: var(--fg-muted);
   text-decoration: none;
 }
 
@@ -24,7 +24,7 @@
 .failures {
   margin: 0.5rem 0 0;
   padding-left: 1.25rem;
-  color: var(--muted);
+  color: var(--fg-muted);
   font-size: 0.8125rem;
   overflow-wrap: anywhere;
 }
@@ -49,6 +49,7 @@
 
 .group-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
