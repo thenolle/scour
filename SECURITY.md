@@ -20,7 +20,7 @@ Avoid including real credentials, personal information or sensitive data in repo
 
 ## Supported versions
 
-scour is in early development. Security fixes are made on the latest development version. Supported release versions will be listed here once stable releases exist.
+Security fixes are made on the latest 1.x release. Older versions are not patched.
 
 ## Design notes
 
