@@ -7,10 +7,11 @@ export function AppHeader(): Child {
 		<header class="topbar">
 			<a class="brand" href="/">scour</a>
 			<nav class="nav" aria-label="Main">
-				<a href="/">Drives</a>
-				<a href="/cleaner">Cleaner</a>
-				<a href="/programs">Programs</a>
-			</nav>
+        <a href="/">Drives</a>
+        <a href="/cleaner">Cleaner</a>
+        <a href="/programs">Programs</a>
+        <a href="/snapshots">Snapshots</a>
+      </nav>
 		</header>
 	)
 }

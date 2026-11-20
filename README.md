@@ -6,7 +6,7 @@ scour runs on your own machine and serves its interface on localhost. It reads t
 
 ## Status
 
-scour is in early development. Disk analysis and a junk cleaner work. Uninstalling and install snapshots are planned and not yet available.
+scour is in early development. Disk analysis, a junk cleaner, an uninstaller and install snapshots work.
 
 Available today:
 
@@ -15,13 +15,11 @@ Available today:
 - A cleaner that finds temporary files, browser caches, developer caches (Cargo, NuGet, Gradle, npm, Bun, pip, and `node_modules` folders found by a scan) and downloaded AI models (Hugging Face, Ollama). Each item has a risk rating: safe, re-downloadable or needs review.
 - A quarantine. The cleaner never deletes. It moves items into a quarantine folder with a manifest, and you can restore them. Items are deleted for good after 14 days by default.
 - An uninstaller that lists installed programs, runs their uninstallers, and scans for leftover folders and registry keys. Folders go to the quarantine. Registry keys are exported to `.reg` files first and can be restored.
+- Install snapshots. Record Program Files, ProgramData, AppData, the desktops and the registry under `Software`, run an installer, then compare. New folders are moved to the quarantine and new registry keys are exported and deleted, so both can be restored.
 
 Scanning only reads the file system. The cleaner changes files only when you select items and confirm, and only by moving them into the quarantine.
 
 Planned, in this order:
-
-- Install snapshots: record the system before and after an installer runs, then remove what it added.
-
 ### Known limitations
 
 - Only the 100 largest files in each folder are listed individually. Smaller files are counted in the totals.
@@ -30,6 +28,10 @@ Planned, in this order:
 - Files that other programs have open cannot be moved to quarantine. The cleaner reports them and leaves them in place.
 - Finding junk runs while the page waits, so it can take a while on drives with large caches.
 - Leftover detection matches names only, so check each item. Removing machine-wide registry keys and folders under Program Files needs an elevated terminal.
+- Leftover detection matches names only, so check each item. Removing machine-wide registry keys and folders under Program Files needs an elevated terminal.
+- Snapshots do not cover `C:\Windows`, services or drivers, and they skip registry keys with non-ASCII names.
+- A comparison also lists changes made by other programs that ran in between, so check the list before removing.
+- Snapshots are read into memory during a comparison, so very large ones need a lot of RAM.
 
 ## Requirements
 
