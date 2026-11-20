@@ -17,7 +17,7 @@ export default function ScanPage(props: PageProps<ParamsOf<'/scan/[id]'>, Loader
 	const last = view.crumbs.length - 1
 	return (
 		<div class="app">
-			<AppHeader />
+			<AppHeader current="drives" />
 			<main class="shell wide" data-scan-id={view.id} data-scan-status={view.status} data-dup-status={view.duplicates.status}>
 				<div class="page-head">
 					<div class="page-title">

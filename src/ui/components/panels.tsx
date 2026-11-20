@@ -33,7 +33,7 @@ export function ProgressPanel(props: { readonly view: ScanView }): Child {
 				</dl>
 				<p class="current-path muted" data-live="path">{progress.currentPath}</p>
 				<form method="post" action={`/actions/scan/${encodeURIComponent(id)}/cancel`}>
-					<Button type="submit">Cancel scan</Button>
+					<Button type="submit" variant="outline">Cancel scan</Button>
 				</form>
 			</CardContent>
 		</Card>

@@ -13,7 +13,7 @@ export default function CleanerPage(props: PageProps<ParamsOf<'/cleaner'>, Loade
 	const report = view.report
 	return (
 		<div class="app">
-			<AppHeader />
+			<AppHeader current="cleaner" />
 			<main class="shell wide">
 				{report === null ? null : (
 					<div class={report.kind === 'ok' ? 'notice notice-ok' : 'notice notice-error'} role="status">

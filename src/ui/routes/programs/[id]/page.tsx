@@ -14,7 +14,7 @@ export default function ProgramPage(props: PageProps<ParamsOf<'/programs/[id]'>,
   const found = leftovers === null ? 0 : leftovers.files.length + leftovers.keys.length
   return (
     <div class="app">
-      <AppHeader />
+      <AppHeader current="programs" />
       <main class="shell wide" data-job-id={program.id} data-job-status={job === null ? 'none' : job.status}>
         {report === null ? null : (
           <div class={report.kind === 'ok' ? 'notice notice-ok' : 'notice notice-error'} role="status">
@@ -106,7 +106,7 @@ export default function ProgramPage(props: PageProps<ParamsOf<'/programs/[id]'>,
                     <tbody>
                       {leftovers.files.map((file) => (
                         <tr key={file.id}>
-                          <td class="check"><input type="checkbox" name="leftover" value={file.id} aria-label={`Select ${file.path}`} /></td>
+                          <td class="check"><input type="checkbox" class="gb-checkbox" name="leftover" value={file.id} aria-label={`Select ${file.path}`} /></td>
                           <td class="name-cell"><span class="entry" title={file.path}>{file.path}</span><span class="note muted">{`Folder to quarantine \u00b7 ${formatCount(file.files)} files \u00b7 ${file.reason}`}</span></td>
                           <td><span class={`badge badge-${file.confidence}`}>{file.confidence}</span></td>
                           <td class="num">{formatBytes(file.bytes)}</td>
@@ -114,7 +114,7 @@ export default function ProgramPage(props: PageProps<ParamsOf<'/programs/[id]'>,
                       ))}
                       {leftovers.keys.map((key) => (
                         <tr key={key.id}>
-                          <td class="check"><input type="checkbox" name="leftover" value={key.id} aria-label={`Select ${key.key}`} /></td>
+                          <td class="check"><input type="checkbox" class="gb-checkbox" name="leftover" value={key.id} aria-label={`Select ${key.key}`} /></td>
                           <td class="name-cell"><span class="entry" title={key.key}>{key.key}</span><span class="note muted">{`Registry key, exported before deletion \u00b7 ${key.reason}`}</span></td>
                           <td><span class={`badge badge-${key.confidence}`}>{key.confidence}</span></td>
                           <td></td>
