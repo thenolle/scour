@@ -9,6 +9,8 @@ import { createHttpApp } from './server/app'
 import { ScanHub } from './server/hub'
 import { startServer } from './server/server'
 import { APP_NAME } from './shared/meta'
+import { snapshotExclusions, snapshotRoots } from './snapshots/filesystem'
+import { SnapshotManager, createSnapshotStore } from './snapshots/manager'
 import { UninstallManager } from './uninstaller/manager'
 import { RegistrySurgeon } from './uninstaller/registry'
 
@@ -38,6 +40,16 @@ async function main(): Promise<void> {
     console.warn(`[${APP_NAME}] ${error instanceof Error ? error.message : String(error)}`)
   }
 
+  const snapshots = new SnapshotManager(
+    createSnapshotStore(join(config.dataDirectory, 'snapshots')),
+    vault,
+    surgeon,
+    snapshotRoots(),
+    snapshotExclusions(config.dataDirectory),
+    (event) => hub.publish(event)
+  )
+  await snapshots.load()
+
   const unsubscribe = scans.subscribe((event) => hub.publish(event))
   const refresh = setInterval(() => {
     void drives.refresh()
@@ -56,7 +68,7 @@ async function main(): Promise<void> {
     void purge()
   }, PURGE_INTERVAL_MS)
 
-  const server = startServer(createHttpApp(config, { scans, drives, cleaner, uninstaller }), { hostname: config.host, port: config.port }, hub)
+  const server = startServer(createHttpApp(config, { scans, drives, cleaner, uninstaller, snapshots }), { hostname: config.host, port: config.port }, hub)
 
   let stopping = false
   const stop = (): void => {
@@ -66,6 +78,7 @@ async function main(): Promise<void> {
     clearInterval(purgeTimer)
     unsubscribe()
     scans.cancelAll()
+    snapshots.stop()
     hub.stop()
     void server.stop().then(() => process.exit(0))
   }
