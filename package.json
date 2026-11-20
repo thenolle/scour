@@ -1,6 +1,6 @@
 {
   "name": "scour",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Windows disk space analyzer, risk-scored cleaner and deep uninstaller.",
   "license": "PolyForm-Strict-1.0.0",
@@ -16,7 +16,8 @@
     "typecheck": "tsc --noEmit",
     "licenses": "bun scripts/licenses.ts",
     "screenshots": "bun scripts/screenshots.ts",
-    "check": "bun run generate && bun run typecheck && bun run build"
+    "version-check": "bun scripts/version-check.ts",
+    "check": "bun run generate && bun run typecheck && bun run version-check && bun run build"
   },
   "devDependencies": {
     "@types/bun": "^1.4.4",

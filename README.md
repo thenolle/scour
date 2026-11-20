@@ -6,7 +6,7 @@ scour runs on your own machine and serves its interface on localhost. It reads t
 
 ## Status
 
-scour is in early development. Disk analysis, a junk cleaner, an uninstaller and install snapshots work.
+scour 1.0 is the first stable release. Disk analysis, a junk cleaner, an uninstaller and install snapshots all work.
 
 Available today:
 
